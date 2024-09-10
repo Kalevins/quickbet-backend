@@ -1,73 +1,49 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Quickbet
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+_Proyecto de un sistema de cine que consume la API de TMDB
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 🔧 Instalación
 
-## Description
+_En el directorio del proyecto ejecutar:_
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ pnpm install
+```
+npm i
+```
+```
+npm run start:dev
 ```
 
-## Running the app
+## 📦 Resultados
 
-```bash
-# development
-$ pnpm run start
+_Puedes ver el proyecto en:_
 
-# watch mode
-$ pnpm run start:dev
+[Quickbet](https://quickbet.vercel.app)
 
-# production mode
-$ pnpm run start:prod
+_Y la documentación de la API en:_
+
+[Quickbet API](https://quickbet-5b2467e3a1da.herokuapp.com/api)
+
+## 📦 Despliegue en Heroku
+
+_Para desplegar el proyecto en Heroku, primero debes tener una cuenta en Heroku y asociar tu repositorio de GitHub_
+
+```
+git add .
+git commit -m "Comentario"
+git push origin main
 ```
 
-## Test
+_Luego en Heroku, seleccionar el repositorio de GitHub y darle deploy_
 
-```bash
-# unit tests
-$ pnpm run test
+## 🛠️ Construcción
 
-# e2e tests
-$ pnpm run test:e2e
+* [NestJS](https://nestjs.com/) - El framework de NodeJS
+* [TypeScript](https://www.typescriptlang.org/) - Superset de JavaScript
 
-# test coverage
-$ pnpm run test:cov
-```
+## ✒️ Autores
 
-## Support
+* **Kevin Muñoz Rengifo** - *Totalidad* - [Kalevins](https://github.com/Kalevins)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🎁 Expresiones de Gratitud
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+* Agradecimientos especiales a Inlaze
