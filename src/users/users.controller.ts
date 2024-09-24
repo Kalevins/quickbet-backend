@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import type { DeleteResult } from "typeorm";
 
 import { UsersGuard } from "./users.guard";
 import { UsersService } from "./users.service";
@@ -33,7 +34,7 @@ export class UsersController {
   @ApiResponse({ status: HttpStatus.OK, description: "User found" })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "User not found" })
   @Post("findById")
-  public findById(@Body() userId: number): Promise<User | undefined> {
+  public findById(@Body() userId: number): Promise<User | null> {
     return this.usersService.findById(userId);
   }
 
@@ -53,7 +54,7 @@ export class UsersController {
   @ApiResponse({ status: HttpStatus.OK, description: "User updated" })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "User not found" })
   @Post("update")
-  public update(@Body() updateDto: UpdateDto): Promise<User | undefined> {
+  public update(@Body() updateDto: UpdateDto): Promise<User | null> {
     return this.usersService.update(updateDto.userId, updateDto.username, updateDto.password);
   }
 
@@ -63,7 +64,7 @@ export class UsersController {
   @ApiResponse({ status: HttpStatus.OK, description: "User deleted" })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: "User not found" })
   @Get("delete")
-  public delete(@Body() userId: number): Promise<User | undefined> {
+  public delete(@Body() userId: number): Promise<DeleteResult> {
     return this.usersService.delete(userId);
   }
 }

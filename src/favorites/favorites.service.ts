@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { Injectable } from "@nestjs/common";
-
-type Favorites = Record<string, number[]>;
+import { InjectRepository } from "@nestjs/typeorm";
+import { Favorites } from "./favorites.entity";
+import { Repository } from "typeorm";
 
 export interface Favorite {
   movieId: number;
@@ -9,29 +10,22 @@ export interface Favorite {
 
 @Injectable()
 export class FavoritesService {
-  private favorites: Favorites = {}; // In-memory storage for simplicity
+  public constructor(
+    @InjectRepository(Favorites)
+    private readonly favoritesRepository: Repository<Favorites>,
+  ) {}
 
-  public addFavorite(userId: number, movieId: number): Promise<Favorite> {
-    const userKey = userId.toString();
-
-    if (!this.favorites[userKey]) {
-      this.favorites[userKey] = [];
+  public async addFavorite(userId: number, movieId: number): Promise<Favorites> {
+    const favorite = await this.favoritesRepository.findOne({ where: { userId, movieId } });
+    if (favorite) {
+      await this.favoritesRepository.delete(favorite.favoriteId);
+      return favorite;
     }
-
-    const index = this.favorites[userKey].indexOf(movieId);
-
-    if (index === -1) {
-      this.favorites[userKey].push(movieId);
-    } else {
-      this.favorites[userKey].splice(index, 1);
-    }
-
-    return Promise.resolve({ movieId });
+    return this.favoritesRepository.save({ userId, movieId });
   }
 
-  public getFavorites(userId: number): Promise<number[]> {
-    const userKey = userId.toString();
-    const favorites = this.favorites[userKey] || [];
-    return Promise.resolve(favorites);
+  public async getFavorites(userId: number): Promise<number[]> {
+    const favorites = await this.favoritesRepository.find({ where: { userId } });
+    return favorites.map((favorite) => favorite.movieId);
   }
 }

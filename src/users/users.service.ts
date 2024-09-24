@@ -1,4 +1,9 @@
 import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import type { DeleteResult } from "typeorm";
+
+import { Users } from "./users.entity";
 
 export interface User {
   userId: number;
@@ -9,66 +14,38 @@ export interface User {
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[] = [
-    {
-      userId: 1,
-      username: "admin@admin.com",
-      password: "admin1234",
-      active: true,
-    },
-    {
-      userId: 2,
-      username: "kevin@email.com",
-      password: "test1234",
-      active: true,
-    },
-  ];
+  public constructor(
+    @InjectRepository(Users)
+    private readonly usersRepository: Repository<Users>,
+  ) {}
 
   public create(username: string, password: string): Promise<User> {
-    const user: User = {
-      userId: this.users.length + 1,
-      username,
-      password,
-      active: true,
-    };
-    this.users.push(user);
-    return Promise.resolve(user);
+    return this.usersRepository.save({ username, password, active: true });
   }
 
-  public findByUsername(username: string): Promise<User | undefined> {
-    const user = this.users.find((user) => user.username === username);
-    return Promise.resolve(user);
+  public findByUsername(username: string): Promise<User | null> {
+    return this.usersRepository.findOneBy({ username });
   }
 
-  public findById(userId: number): Promise<User | undefined> {
-    const user = this.users.find((user) => user.userId === userId);
-    return Promise.resolve(user);
+  public findById(userId: number): Promise<User | null> {
+    return this.usersRepository.findOneBy({ userId });
   }
 
   public findAll(): Promise<User[]> {
-    return Promise.resolve(this.users);
+    return this.usersRepository.find();
   }
 
-  public async update(
-    userId: number,
-    username: string,
-    password: string,
-  ): Promise<User | undefined> {
-    const user = this.users.find((user) => user.userId === userId);
+  public async update(userId: number, username: string, password: string): Promise<User | null> {
+    const user = await this.usersRepository.findOneBy({ userId });
     if (!user) {
-      return undefined;
+      return null;
     }
     user.username = username;
     user.password = password;
-    return Promise.resolve(user);
+    return this.usersRepository.save(user);
   }
 
-  public async delete(userId: number): Promise<User | undefined> {
-    const user = this.users.find((user) => user.userId === userId);
-    if (!user) {
-      return undefined;
-    }
-    user.active = false;
-    return Promise.resolve(user);
+  public async delete(userId: number): Promise<DeleteResult> {
+    return this.usersRepository.delete(userId);
   }
 }
