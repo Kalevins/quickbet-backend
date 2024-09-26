@@ -1,12 +1,15 @@
 import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { ConfigModule } from "@nestjs/config";
 
 import { AuthModule } from "../auth/auth.module";
 import { UsersModule } from "../users/users.module";
 import { jwtConstants } from "../constants";
 import { Users } from "../users/users.entity";
 import { Favorites } from "../favorites/favorites.entity";
+
+ConfigModule.forRoot();
 
 @Module({
   imports: [
@@ -19,13 +22,16 @@ import { Favorites } from "../favorites/favorites.entity";
     }),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "100616010679",
-      database: "test",
+      host: process.env.DATABASE_HOST,
+      port: parseInt(process.env.DATABASE_PORT || "3306", 10),
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [Users, Favorites],
-      synchronize: true,
+      synchronize: true, // use this with development environment only
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
   ],
 })
