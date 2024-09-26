@@ -7,11 +7,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'README.md'
-      - '.husky'
-      - '.github/**'
-      - '**/*.csv'
   workflow_dispatch:
 
 jobs:
