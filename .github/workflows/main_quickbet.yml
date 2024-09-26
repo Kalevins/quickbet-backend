@@ -7,6 +7,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'README.md'
+      - '.husky'
+      - '.github/**'
+      - '**/*.csv'
   workflow_dispatch:
 
 jobs:
@@ -23,6 +28,7 @@ jobs:
 
       - name: npm install and build
         run: |
+          npm install -g @nestjs/cli
           npm install
           npm run build --if-present
 
@@ -52,7 +58,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -67,4 +73,3 @@ jobs:
           app-name: 'quickbet'
           slot-name: 'Production'
           package: .
-          
