@@ -16,6 +16,8 @@ async function bootstrap(): Promise<void> {
   SwaggerModule.setup("api", app, document);
 
   app.enableCors();
-  await app.listen(process.env.PORT || 3200);
+  // eslint-disable-next-line no-console
+  console.log(`Listening on port ${process.env.PORT}`);
+  await app.listen(443);
 }
 void bootstrap();
