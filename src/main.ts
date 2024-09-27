@@ -3,6 +3,8 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 
 import { AppModule } from "./app/app.module";
 
+const port = process.env.PORT || 3200;
+
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
@@ -16,8 +18,6 @@ async function bootstrap(): Promise<void> {
   SwaggerModule.setup("api", app, document);
 
   app.enableCors();
-  // eslint-disable-next-line no-console
-  console.log(`Listening on port ${process.env.PORT}`);
-  await app.listen(443);
+  await app.listen(port);
 }
 void bootstrap();
